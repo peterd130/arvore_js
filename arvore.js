@@ -17,8 +17,11 @@ class Arvore {
     }
   }
 
-  buscaProfundidade () {
-    
+  percorreEmProfundidade (nodo) {
+    console.log(nodo.valor)
+    for (let f of nodo.filhos){
+      this.percorreEmProfundidade (f)
+    }
   }
 }
 
