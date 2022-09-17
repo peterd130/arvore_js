@@ -38,6 +38,25 @@ class Arvore {
     }
     return nodo.utilidade
   }
+
+  podaMinimax (nodo, maximiza, utilidadePai) {
+    for (let f of nodo.filhos){
+      let utilidade = this.podaMinimax (f, !maximiza, nodo.utilidade)
+
+      if (!nodo.utilidade ||
+        (nodo.utilidade && 
+          ((maximiza && utilidade > nodo.utilidade) || 
+          (!maximiza && utilidade < nodo.utilidade))
+        ))
+        nodo.utilidade = utilidade
+
+      if (utilidadePai && 
+        ((maximiza  && nodo.utilidade >= utilidadePai) || 
+        (!maximiza && nodo.utilidade <= utilidadePai)))
+        break
+    }
+    return nodo.utilidade
+  }
 }
 
 module.exports = Arvore
